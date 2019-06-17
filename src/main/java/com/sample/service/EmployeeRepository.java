@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,17 @@ public class EmployeeRepository {
 	
 	public List<Employee> getEmployees() {
 		return employeeRepository.stream().sorted((e1,e2) -> new Long(e1.getId()).compareTo(new Long(e2.getId()))).collect(Collectors.toList());
+	}
+	
+	public Employee getEmployee(int id) {
+		Iterator<Employee> iterator = employeeRepository.iterator();
+		while(iterator.hasNext()) {
+			Employee employee = iterator.next();
+			if(id == employee.getId()) {
+				return employee;
+			}
+		}
+		return null;
 	}
 	
 	public void deleteEmployee(final int id) {
