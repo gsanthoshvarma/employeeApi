@@ -11,6 +11,20 @@ public class Employee {
 	private String lastName;
 	private String dob;
 	private String emailId;
+	private Address address;
+	private String imageUrl;
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	public long getId() {
 		return id;
 	}
@@ -51,7 +65,7 @@ public class Employee {
 	public Employee() {
 		super();
 	}
-	public Employee(long id, String firstName, String middleName, String lastName, String dob, String emailId) {
+	public Employee(long id, String firstName, String middleName, String lastName, String dob, String emailId,String imageUrl,Address address) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -59,6 +73,9 @@ public class Employee {
 		this.lastName = lastName;
 		this.dob = dob;
 		this.emailId = emailId;
+		this.imageUrl = imageUrl;
+		this.address = address;
+		
 	}
 	
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sample.exception.EmployeeNotFoundException;
 import com.sample.model.Employee;
 import com.sample.service.EmployeeRepository;
 
@@ -27,8 +28,12 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/employees/{id}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE})
-	public Employee getEmployee(@PathVariable int id) {
-		return employeeRepository.getEmployee(id);
+	public ResponseEntity<?> getEmployee(@PathVariable int id) {
+		Employee emp = employeeRepository.getEmployee(id);
+		if(emp == null) {
+			throw new EmployeeNotFoundException("Employee with id "+id+ " not found");
+		}
+		return new ResponseEntity<>(emp,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/employees/delete/{id}",method=RequestMethod.DELETE)
