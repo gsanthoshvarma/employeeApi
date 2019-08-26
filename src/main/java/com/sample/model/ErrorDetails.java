@@ -1,4 +1,4 @@
-package com.sample.exception;
+package com.sample.model;
 
 public class ErrorDetails {
 	

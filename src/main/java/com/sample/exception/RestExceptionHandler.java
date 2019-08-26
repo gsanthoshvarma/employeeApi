@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.sample.model.ErrorDetails;
+
 @ControllerAdvice
 public class RestExceptionHandler {
 
 	@ExceptionHandler(value=EmployeeNotFoundException.class)
-	public ResponseEntity<?> handleResourceNotFoundException(EmployeeNotFoundException exception,HttpRequest request){
+	public ResponseEntity<?> handleResourceNotFoundException(EmployeeNotFoundException exception){
 		ErrorDetails error = new ErrorDetails();
 		error.setTimestamp(new Date().getTime());
 		error.setStatus(HttpStatus.NOT_FOUND.value());
