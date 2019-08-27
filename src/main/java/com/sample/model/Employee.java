@@ -1,14 +1,20 @@
 package com.sample.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class Employee {
 	
 	private long id;
+	@NotEmpty
 	private String firstName;
 	private String middleName;
+	@NotEmpty
 	private String lastName;
+	@NotEmpty
 	private String dob;
 	private String emailId;
 	private Address address;

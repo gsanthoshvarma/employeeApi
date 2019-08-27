@@ -2,6 +2,8 @@ package com.sample.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,7 +45,7 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/employees/save/",method=RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Void> saveEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<Void> saveEmployee(@Valid @RequestBody Employee employee) {
 		employeeRepository.addEmployee(employee);
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}

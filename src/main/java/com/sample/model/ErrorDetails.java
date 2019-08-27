@@ -1,12 +1,20 @@
 package com.sample.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.Validation;
+
 public class ErrorDetails {
 	
-	private long timestamp;
 	private String title;
-	private String details;
-	private String message;
 	private int status;
+	private String details;
+	private long timestamp;
+	private String exception;
+	private Map<String, List<ValidationError>> errors = new HashMap<>();
+	
 	public long getTimestamp() {
 		return timestamp;
 	}
@@ -25,17 +33,23 @@ public class ErrorDetails {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	public String getMessage() {
-		return message;
+	public String getException() {
+		return exception;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setException(String exception) {
+		this.exception = exception;
 	}
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public Map<String, List<ValidationError>> getErrors() {
+		return errors;
+	}
+	public void setErrors(Map<String, List<ValidationError>> errors) {
+		this.errors = errors;
 	}
 	
 	
