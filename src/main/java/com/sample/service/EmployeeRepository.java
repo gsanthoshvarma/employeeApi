@@ -8,13 +8,18 @@ import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sample.dao.EmployeeDaoImpl;
 import com.sample.model.Address;
 import com.sample.model.Employee;
 
 @Repository
 public class EmployeeRepository {
+	
+	@Autowired
+	private EmployeeDaoImpl employeeDaoImpl;
 	static List<Employee> employeeRepository = new ArrayList<Employee>();
 	static {
 		
@@ -26,6 +31,7 @@ public class EmployeeRepository {
 	}
 	
 	public List<Employee> getEmployees() {
+		employeeDaoImpl.save();
 		return employeeRepository.stream().sorted((e1,e2) -> new Long(e1.getId()).compareTo(new Long(e2.getId()))).collect(Collectors.toList());
 	}
 	

@@ -13,9 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.sample.model.ErrorDetails;
-import com.sample.model.ValidationError;
-
 @ControllerAdvice
 public class RestExceptionHandler {
 

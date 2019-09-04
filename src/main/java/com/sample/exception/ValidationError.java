@@ -1,4 +1,4 @@
-package com.sample.model;
+package com.sample.exception;
 
 public class ValidationError {
 	
