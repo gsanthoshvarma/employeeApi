@@ -6,7 +6,7 @@ public class EmployeeDispatcherServletInitializer extends AbstractAnnotationConf
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return null;
+		return new Class[] {EmployeeSecurityConfig.class};
 	}
 
 	@Override

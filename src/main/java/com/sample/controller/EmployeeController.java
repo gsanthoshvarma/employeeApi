@@ -25,13 +25,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
-	@Autowired
-	private SessionFactory sessionFactoryBean;
-	
 	
 	@RequestMapping(value="/employees",method=RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<Employee> getEmployeeDetails() {
-		System.out.println("-------->"+sessionFactoryBean);
 		return employeeRepository.getEmployees();
 	}
 	
