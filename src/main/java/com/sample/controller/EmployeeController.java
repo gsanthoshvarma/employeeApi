@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hibernate.SessionFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +21,7 @@ import com.sample.service.EmployeeRepository;
 
 @RestController
 public class EmployeeController {
+	private static final Logger LOG = Logger.getLogger(EmployeeController.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -28,6 +29,10 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/employees",method=RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<Employee> getEmployeeDetails() {
+		LOG.info("EmployeeController - employees service got invoked");
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("End Point --> /employees");
+		}
 		return employeeRepository.getEmployees();
 	}
 	
@@ -35,6 +40,7 @@ public class EmployeeController {
 	public ResponseEntity<?> getEmployee(@PathVariable int id) {
 		Employee emp = employeeRepository.getEmployee(id);
 		if(emp == null) {
+			LOG.error("Employee with id \"+id+ \" not found");
 			throw new EmployeeNotFoundException("Employee with id "+id+ " not found");
 		}
 		return new ResponseEntity<>(emp,HttpStatus.OK);
