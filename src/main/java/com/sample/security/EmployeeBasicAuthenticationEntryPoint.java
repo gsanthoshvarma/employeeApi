@@ -18,8 +18,8 @@ public class EmployeeBasicAuthenticationEntryPoint extends BasicAuthenticationEn
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
-		/*response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-				authException.getMessage());*/
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+				authException.getMessage());
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		PrintWriter writer = response.getWriter();
         writer.println("HTTP Status 401 - " + authException.getMessage());
@@ -27,7 +27,7 @@ public class EmployeeBasicAuthenticationEntryPoint extends BasicAuthenticationEn
 	
 	@Override
     public void afterPropertiesSet() throws Exception {
-        setRealmName("learn");
+        setRealmName("EmployeeAPI");
         super.afterPropertiesSet();
     }
 

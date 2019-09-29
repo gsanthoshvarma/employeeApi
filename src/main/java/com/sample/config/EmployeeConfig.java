@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan({"com.sample.*"})
 @EnableWebMvc
 public class EmployeeConfig {
+	
+	@Value("${data_source}")
+	private String dataSourceName; 
 	
 	
 	@Bean
@@ -42,4 +46,5 @@ public class EmployeeConfig {
 		prop.setProperty("hibernate.current_session_context_class", "thread");
 		return prop;
 	}
+	
 }
