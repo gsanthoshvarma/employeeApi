@@ -7,21 +7,23 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.sample.hr.po.CountryPO;
+import com.sample.hr.po.DepartmentPO;
+import com.sample.hr.po.EmployeePO;
+import com.sample.hr.po.JobPO;
+import com.sample.hr.po.LocationPO;
+import com.sample.hr.po.RegionPO;
+
 @Configuration
 @ComponentScan({"com.sample.*"})
 @EnableWebMvc
 public class EmployeeConfig {
-	
-	@Value("${data_source}")
-	private String dataSourceName; 
-	
 	
 	@Bean
 	public DataSource getDataSource() throws NamingException {
@@ -35,6 +37,7 @@ public class EmployeeConfig {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(getDataSource());
 		sessionFactoryBean.setHibernateProperties(getHibernateProperties());
+		sessionFactoryBean.setAnnotatedClasses(EmployeePO.class,DepartmentPO.class,CountryPO.class,JobPO.class,LocationPO.class,RegionPO.class);;
 		return sessionFactoryBean;
 	}
 	
@@ -46,5 +49,6 @@ public class EmployeeConfig {
 		prop.setProperty("hibernate.current_session_context_class", "thread");
 		return prop;
 	}
+	
 	
 }

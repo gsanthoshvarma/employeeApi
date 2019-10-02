@@ -1,7 +1,6 @@
 package com.sample.model;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
 
 import org.springframework.stereotype.Component;
 
@@ -16,9 +15,18 @@ public class Employee {
 	private String lastName;
 	@NotEmpty
 	private String dob;
+	private String dateOfJoined;
 	private String emailId;
 	private Address address;
 	private String imageUrl;
+	private String mobileNumber;
+	
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -66,6 +74,12 @@ public class Employee {
 	}
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
+	}
+	public String getDateOfJoined() {
+		return dateOfJoined;
+	}
+	public void setDateOfJoined(String dateOfJoined) {
+		this.dateOfJoined = dateOfJoined;
 	}
 	
 	public Employee() {

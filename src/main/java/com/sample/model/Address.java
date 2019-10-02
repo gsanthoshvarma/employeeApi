@@ -2,11 +2,20 @@ package com.sample.model;
 
 public class Address {
 	
+	private int id;
 	private String address;
 	private String city;
 	private String state;
 	private String country;
-	private int pincode;
+	private String pincode;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -31,10 +40,10 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public int getPincode() {
+	public String getPincode() {
 		return pincode;
 	}
-	public void setPincode(int pincode) {
+	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
 	
@@ -42,12 +51,16 @@ public class Address {
 		super();
 	}
 	
-	public Address(String address,String city,String state,String country,int pincode) {
+	public Address(String address,String city,String state,String country,String pincode) {
 		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.country = country;
 		this.pincode = pincode;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println((int) (Math.random()*31)+"/"+(int) (Math.random()*13)+"/19"+ ((int)(Math.random()*((9 - 8) + 1)) + 8));
 	}
 	
 }
