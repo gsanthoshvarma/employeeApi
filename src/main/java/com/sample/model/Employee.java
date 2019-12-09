@@ -15,12 +15,33 @@ public class Employee {
 	private String lastName;
 	@NotEmpty
 	private String dob;
+	private String designation;
 	private String dateOfJoined;
 	private String emailId;
 	private Address address;
 	private String imageUrl;
 	private String mobileNumber;
+	private String gender;
+	private long salary;
 	
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public long getSalary() {
+		return salary;
+	}
+	public void setSalary(long salary) {
+		this.salary = salary;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public String getMobileNumber() {
 		return mobileNumber;
 	}

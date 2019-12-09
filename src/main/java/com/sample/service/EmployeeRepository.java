@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.sample.hr.dao.EmployeeDaoImpl;
 import com.sample.hr.po.EmployeePO;
@@ -15,7 +15,7 @@ import com.sample.mapper.EmployeeMapper;
 import com.sample.model.Address;
 import com.sample.model.Employee;
 
-@Repository
+@Service
 public class EmployeeRepository {
 	
 	private static final Logger LOG = Logger.getLogger(EmployeeRepository.class);
@@ -34,7 +34,7 @@ public class EmployeeRepository {
 	
 	public List<Employee> getEmployees() {
 		List<EmployeePO> employeePOs = employeeDao.getEmployees();
-		LOG.info("Total Employees --->"+employeePOs.stream().count());
+		LOG.info("Total number of Employees {} "+employeePOs.stream().count());
 		List<Employee> employees = new ArrayList<>();
 		employeePOs.parallelStream().forEach(e -> employees.add(EmployeeMapper.INSTANCE.employeePOToEmployee(e)));
 		return employees.parallelStream().sorted((e1,e2) -> new Long(e1.getId()).compareTo(new Long(e2.getId()))).collect(Collectors.toList());

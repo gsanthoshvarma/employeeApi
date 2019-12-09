@@ -47,6 +47,8 @@ public class EmployeeConfig {
 		prop.setProperty("hibernate.show_sql", "true");
 		prop.setProperty("hibernate.hbm2ddl.auto", "update");
 		prop.setProperty("hibernate.current_session_context_class", "thread");
+		//prop.setProperty("hibernate.generate_statistics", "true");
+		prop.setProperty("hibernate.format_sql", "true");
 		return prop;
 	}
 	

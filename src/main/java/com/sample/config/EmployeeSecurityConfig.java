@@ -1,9 +1,14 @@
 package com.sample.config;
 
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import com.sample.security.EmployeeBasicAuthenticationEntryPoint;
+import com.sample.security.MyUserDetailsService;
 
 @Configurable
 @EnableWebSecurity
@@ -19,15 +25,19 @@ import com.sample.security.EmployeeBasicAuthenticationEntryPoint;
 public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private static final String[] PUBLIC_MATCHERS = {
-			"/employees/",
+			//"/employees/",
 			"/department/"	
 			 };
 
 	@Autowired
 	EmployeeBasicAuthenticationEntryPoint authenticationEntryPoint;
+	
+	@Autowired
+	MyUserDetailsService userDetailsService;
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//auth.userDetailsService(userDetailsService);
 		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 	}
 
@@ -38,5 +48,11 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter {
 		  	.antMatchers(HttpMethod.GET,PUBLIC_MATCHERS).permitAll().antMatchers("/employees/**").authenticated()
 			.and().httpBasic().realmName("employeeAPI").authenticationEntryPoint(authenticationEntryPoint);
 	}
+	
+	/*@SuppressWarnings("deprecation")
+	@Bean
+	public PasswordEncoder getPasswordEncoder() {
+		return new ShaPasswordEncoder("SHA256").encodePassword("admin", null);
+	}*/
 	
 }

@@ -22,7 +22,8 @@ public interface EmployeeMapper {
 	    	@Mapping(source="departmentPO.location.city",target="address.city"),
 	    	@Mapping(source="departmentPO.location.postalCode",target="address.pincode"),
 	    	@Mapping(source="departmentPO.location.state",target="address.state"),
-	    	@Mapping(source="departmentPO.location.country.countryName", target="address.country")
+	    	@Mapping(source="departmentPO.location.country.countryName", target="address.country"),
+	    	@Mapping(source="job.jobName",target="designation")
 	    })
 	         Employee employeePOToEmployee(EmployeePO employeePO);
 
