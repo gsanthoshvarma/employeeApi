@@ -59,8 +59,40 @@ public class Address {
 		this.pincode = pincode;
 	}
 	
+	static enum MONTH {
+		JAN(1),FEB(2),MAR(3),APR(4),MAY(5),JUN(6),JUL(7),AUG(8),SEP(9),OCT(10),NOV(11),DEC(12);
+		
+		  MONTH(int number) {
+		   }
+		  
+		  public static String getValue(int number) {
+			  MONTH values[] = MONTH.values();
+			  for(MONTH name : values) {
+				  if(number == name.ordinal()) {
+					 // System.out.println(name.name());
+					  return name.name();
+			  }
+		  }
+			  return  null;
+	}
+	}
+	
 	public static void main(String[] args) {
-		System.out.println((int) (Math.random()*31)+"/"+(int) (Math.random()*13)+"/19"+ ((int)(Math.random()*((9 - 8) + 1)) + 8));
+		MONTH.getValue(1);
+		for(int i = 100 ; i < 207 ; i ++) {
+			int dateVal = (int) (Math.random()*((31 - 1) + 1)) + 1;
+			int monthNumber = (int) (Math.random()*((11 - 0) + 1)) + 0;
+			int yearNumber1 = (int)(Math.random()*((9 - 8) + 1)) + 8;
+			int yearNumber2 = (int) (Math.random()*9);
+			System.out.print("UPDATE \"HR\".\"EMPLOYEES\" SET DOB = '");
+			System.out.print(String.valueOf(dateVal).length() == 2 ? String.valueOf(dateVal) : "0" + String.valueOf(dateVal));
+			System.out.print("/");
+			System.out.print(MONTH.getValue(monthNumber));
+			//System.out.print(String.valueOf(monthNumber).length() == 2 ? String.valueOf(monthNumber) : "0"+String.valueOf(monthNumber));
+			System.out.print("/19" + String.valueOf(yearNumber1) + String.valueOf(yearNumber2)+"' ");
+			System.out.println("WHERE EMPLOYEE_ID = "+i);
+		}
+		
 	}
 	
 }

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.sample.hr.dao.EmployeeDaoImpl;
 import com.sample.hr.po.EmployeePO;
@@ -15,7 +15,7 @@ import com.sample.mapper.EmployeeMapper;
 import com.sample.model.Address;
 import com.sample.model.Employee;
 
-@Service
+@Repository
 public class EmployeeRepository {
 	
 	private static final Logger LOG = Logger.getLogger(EmployeeRepository.class);

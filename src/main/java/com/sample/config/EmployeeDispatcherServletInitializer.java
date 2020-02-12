@@ -12,7 +12,7 @@ public class EmployeeDispatcherServletInitializer extends AbstractAnnotationConf
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {EmployeeConfig.class};
+		return new Class[] {EmployeeConfig.class,StaticLoaderConfig.class};
 	}
 
 	@Override

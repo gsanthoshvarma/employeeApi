@@ -1,37 +1,40 @@
 package com.sample.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Department {
 	
+	private String departmentName;
+	private String departmentId;
+	private String managerId;
+	private String locationId;
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+	public String getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+	public String getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
+	public String getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
+	}
 	
-	private String deptName;
 	
-	private String deptId;
-	private String mangrId;
-	private String locId;
-	public String getDeptName() {
-		return deptName;
-	}
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-	public String getDeptId() {
-		return deptId;
-	}
-	public void setDeptId(String deptId) {
-		this.deptId = deptId;
-	}
-	public String getMangrId() {
-		return mangrId;
-	}
-	public void setMangrId(String mangrId) {
-		this.mangrId = mangrId;
-	}
-	public String getLocId() {
-		return locId;
-	}
-	public void setLocId(String locId) {
-		this.locId = locId;
-	}
 	
 
 }

@@ -5,7 +5,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import com.sample.hr.po.DepartmentPO;
 import com.sample.hr.po.EmployeePO;
+import com.sample.model.Department;
 import com.sample.model.Employee;
 
 @Mapper
@@ -25,6 +27,14 @@ public interface EmployeeMapper {
 	    	@Mapping(source="departmentPO.location.country.countryName", target="address.country"),
 	    	@Mapping(source="job.jobName",target="designation")
 	    })
-	         Employee employeePOToEmployee(EmployeePO employeePO);
+	    Employee employeePOToEmployee(EmployeePO employeePO);
+	    
+	    
+	    @Mappings({
+	    	@Mapping(source="departmentId" ,target="departmentId"),
+	    	@Mapping(source="departmentName",target="departmentName")
+	    	
+	    })
+	    Department DepartmentPOToDepartment(DepartmentPO departmentPO);
 
 }

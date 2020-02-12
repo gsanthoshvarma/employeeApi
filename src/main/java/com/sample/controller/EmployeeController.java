@@ -7,13 +7,11 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.LinkRelation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +27,7 @@ import com.sample.service.EmployeeRepository;
  * @author Lasya
  *
  */
+@CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
 public class EmployeeController {
 	private static final Logger LOG = Logger.getLogger(EmployeeController.class);
@@ -47,7 +46,7 @@ public class EmployeeController {
 	    employees =  employeeRepository.getEmployees();
 	    HttpHeaders headers = new HttpHeaders();
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(employees.parallelStream().count()).toUri();
-		System.out.println(uri.toString());
+		LOG.info(uri.toString());
 		return employees;
 	}
 	
@@ -62,8 +61,8 @@ public class EmployeeController {
 		/*WebMvcLinkBuilder linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getEmployeeDetails());
 		EntityModel<Employee> entityModel = new EntityModel<Employee>(emp);
 		entityModel.add(linkTo.withRel("all-employee"));*/
-		EntityModel<Employee> entityModel = new EntityModel<Employee>(emp);
-		entityModel.add(new Link("").withRel(LinkRelation.of("employees")));
+		/*EntityModel<Employee> entityModel = new EntityModel<Employee>(emp);
+		entityModel.add(new Link("").withRel(LinkRelation.of("employees")));*/
 		return new ResponseEntity<>(emp,HttpStatus.OK);
 		//return entityModel;
 	}

@@ -54,6 +54,5 @@ public class RestExceptionHandler {
 			}
 		}
 		return new ResponseEntity<>(errorDetails, null, HttpStatus.BAD_REQUEST);
-		
 	}
 }
