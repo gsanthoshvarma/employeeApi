@@ -13,6 +13,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.sample.hr.po.CountryPO;
+import com.sample.hr.po.DepartmentPO;
+import com.sample.hr.po.EmployeePO;
+import com.sample.hr.po.JobPO;
+import com.sample.hr.po.LocationPO;
+import com.sample.hr.po.RegionPO;
+
 @Configuration
 @ComponentScan({"com.sample.*"})
 @EnableWebMvc
@@ -30,14 +37,14 @@ public class EmployeeConfig {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(getDataSource());
 		sessionFactoryBean.setHibernateProperties(getHibernateProperties());
-		/*sessionFactoryBean.setAnnotatedClasses(
+		sessionFactoryBean.setAnnotatedClasses(
 				EmployeePO.class,
 				DepartmentPO.class,
 				CountryPO.class,
 				JobPO.class,
 				LocationPO.class,
-				RegionPO.class);*/
-		sessionFactoryBean.setPackagesToScan("com.sample.hr.po.*"); // No Need to add all the presistance classes, leaveraging Api methods
+				RegionPO.class);
+		//sessionFactoryBean.setPackagesToScan("com.sample.hr.po.*"); // No Need to add all the presistance classes, leaveraging Api methods
 		return sessionFactoryBean;
 	}
 	
