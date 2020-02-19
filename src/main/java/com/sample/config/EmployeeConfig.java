@@ -13,13 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.sample.hr.po.CountryPO;
-import com.sample.hr.po.DepartmentPO;
-import com.sample.hr.po.EmployeePO;
-import com.sample.hr.po.JobPO;
-import com.sample.hr.po.LocationPO;
-import com.sample.hr.po.RegionPO;
-
 @Configuration
 @ComponentScan({"com.sample.*"})
 @EnableWebMvc
