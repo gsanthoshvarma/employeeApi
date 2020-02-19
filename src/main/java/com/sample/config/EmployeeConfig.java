@@ -37,13 +37,14 @@ public class EmployeeConfig {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(getDataSource());
 		sessionFactoryBean.setHibernateProperties(getHibernateProperties());
-		sessionFactoryBean.setAnnotatedClasses(
+		/*sessionFactoryBean.setAnnotatedClasses(
 				EmployeePO.class,
 				DepartmentPO.class,
 				CountryPO.class,
 				JobPO.class,
 				LocationPO.class,
-				RegionPO.class);;
+				RegionPO.class);*/
+		sessionFactoryBean.setPackagesToScan("com.sample.hr.po.*"); // No Need to add all the presistance classes, leaveraging Api methods
 		return sessionFactoryBean;
 	}
 	
