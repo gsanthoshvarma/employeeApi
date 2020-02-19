@@ -13,6 +13,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>4.2.6.RELEASE</spring.version>
 		<hibernate.version>4.0.1.Final</hibernate.version>
+		<mapstruct.version>1.2.0.Final</mapstruct.version>
 	</properties>
 
 	<dependencies>
@@ -101,19 +102,19 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.9.2</version>
+			<version>2.10.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.9.2</version>
+			<version>2.10.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.2</version>
+			<version>2.10.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
@@ -169,9 +170,80 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sample.hr</groupId>
+			<artifactId>hrDal</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/antlr/antlr -->
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+		<!-- Mapping framework Mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.2.0.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-jdk8</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<!-- Hateoas -->
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<!-- <build> <finalName>employeeApi</finalName> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
 		<artifactId>maven-compiler-plugin</artifactId> <version>3.5.1</version> <configuration> 
 		<source>1.8</source> <target>1.8</target> </configuration> </plugin> </plugins> 
 		</build> -->
+
+
+	<build>
+		<finalName>employeeApi</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-Amapstruct.suppressGeneratorTimestamp=true</arg>
+						<arg>-Amapstruct.defaultComponentModel=spring</arg>
+						<!-- <arg>mapstruct.suppressGeneratorVersionInfoComment=true</arg> -->
+					</compilerArgs>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
