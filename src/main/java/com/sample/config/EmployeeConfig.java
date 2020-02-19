@@ -58,6 +58,8 @@ public class EmployeeConfig {
 		prop.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
 		prop.setProperty("hibernate.cache.use_second_level_cache", "true");
 		prop.setProperty("hibernate.cache.use_query_cache", "true");
+		prop.setProperty("hibernate.use_sql_comments","true");
+		prop.setProperty("hibernate.max_fetch_depth","3"); //Instruction to hibernate fetch max 3 level of childs.
 		return prop;
 	}
 	
