@@ -1,8 +1,11 @@
 package com.sample.service;
 
+import static java.util.Comparator.comparingLong;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -37,12 +40,13 @@ public class EmployeeRepository {
 		LOG.info("Total number of Employees {} "+employeePOs.stream().count());
 		List<Employee> employees = new ArrayList<>();
 		employeePOs.parallelStream().forEach(e -> employees.add(EmployeeMapper.INSTANCE.employeePOToEmployee(e)));
-		return employees.parallelStream().sorted((e1,e2) -> new Long(e1.getId()).compareTo(new Long(e2.getId()))).collect(Collectors.toList());
+		return employees.parallelStream().sorted(comparingLong(Employee::getId)).collect(Collectors.toList());
 	}
 	
-	public Employee getEmployee(int id) {
+	
+	public Optional<Employee> getEmployee(int id) {
 		EmployeePO employeePO = employeeDao.getEmployeeById(id);
-		return EmployeeMapper.INSTANCE.employeePOToEmployee(employeePO);
+		return Optional.of(EmployeeMapper.INSTANCE.employeePOToEmployee(employeePO));
 	}
 	
 	public void deleteEmployee(final int id) {
