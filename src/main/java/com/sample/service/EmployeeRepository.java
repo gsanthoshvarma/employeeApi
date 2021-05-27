@@ -1,7 +1,7 @@
 package com.sample.service;
 
 import static java.util.Comparator.comparingLong;
-
+import static java.util.stream.Collectors.toList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +40,8 @@ public class EmployeeRepository {
 		LOG.info("Total number of Employees {} "+employeePOs.stream().count());
 		List<Employee> employees = new ArrayList<>();
 		employeePOs.parallelStream().forEach(e -> employees.add(EmployeeMapper.INSTANCE.employeePOToEmployee(e)));
-		return employees.parallelStream().sorted(comparingLong(Employee::getId)).collect(Collectors.toList());
+		return employees.parallelStream().sorted(comparingLong(Employee::getId)).collect(toList());
+		//
 	}
 	
 	
