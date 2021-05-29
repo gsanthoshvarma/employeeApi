@@ -2,10 +2,14 @@ package com.sample.model;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Employee {
+@Scope(value=ConfigurableBeanFactory.SCOPE_SINGLETON)
+public class Employee extends RepresentationModel<Employee>{
 	
 	private long id;
 	@NotEmpty
@@ -118,8 +122,4 @@ public class Employee {
 		this.address = address;
 		
 	}
-	
-	
-	
-
 }

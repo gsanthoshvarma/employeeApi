@@ -2,16 +2,19 @@ package com.sample.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +30,7 @@ import com.sample.service.EmployeeRepository;
  * @author Lasya
  *
  */
-@CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
 public class EmployeeController {
 	private static final Logger LOG = Logger.getLogger(EmployeeController.class);
@@ -51,19 +54,20 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/employees/{id}",method = RequestMethod.GET,produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
-		Employee emp = employeeRepository.getEmployee(id);
-		if(emp == null) {
+	public EntityModel<Employee> getEmployee(@PathVariable int id) {
+		Optional<Employee> optioanl = employeeRepository.getEmployee(id);
+		if(!optioanl.isPresent()) {
 			LOG.error("Employee with id \"+id+ \" not found");
 			throw new EmployeeNotFoundException("Employee with id "+id+ " not found");
 		}
 		
-		/*WebMvcLinkBuilder linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getEmployeeDetails());
-		EntityModel<Employee> entityModel = new EntityModel<Employee>(emp);
-		entityModel.add(linkTo.withRel("all-employee"));*/
+		Link linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getEmployeeDetails()).withRel("employees");
+		EntityModel<Employee> entityModel = new EntityModel<Employee>(optioanl.get());
+		entityModel.add(linkTo);
+		LOG.info("Heatos implemented "+entityModel);
 		/*EntityModel<Employee> entityModel = new EntityModel<Employee>(emp);
 		entityModel.add(new Link("").withRel(LinkRelation.of("employees")));*/
-		return new ResponseEntity<>(emp,HttpStatus.OK);
+		return entityModel;
 		//return entityModel;
 	}
 	
