@@ -1,20 +1,24 @@
 package com.sample.controller;
 
 import org.junit.Test;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sample.model.UserValue;
+
+import junit.framework.Assert;
 
 
 public class EmployeeControllerRestTemplateTest {
 	
 	private RestTemplate restTemplate = null;
+	private static final String USERNAME ="admin";
+	private static final String PASSWORD = "admin";
+	
 	private static final String AUTHENTICATE_REQUEST = "http://localhost:8080/employeeApi/authenticate/";
 	
 	public EmployeeControllerRestTemplateTest() {
@@ -22,27 +26,28 @@ public class EmployeeControllerRestTemplateTest {
 	}
 	
 	@Test
-	public void getEmployeeByIdTest() throws JsonProcessingException {
+	public void jwtTest() throws JsonProcessingException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		
-		MultiValueMap<String,String> requestMap = new LinkedMultiValueMap<>();
-			requestMap.add("username", "admin");
-			requestMap.add("password", "admin");
-			final HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(requestMap ,
-			        headers);
-		try {
-			ResponseEntity<String> responseEntity = restTemplate.postForEntity(AUTHENTICATE_REQUEST, entity, String.class);
+		    UserValue userValue = new UserValue();
+		    userValue.setUsername(USERNAME);
+		    userValue.setPassword(PASSWORD);
+			ResponseEntity<String> responseEntity = restTemplate.postForEntity(AUTHENTICATE_REQUEST, userValue, String.class);
 			System.out.println(responseEntity.getBody());
-		}catch (Exception e) {
-			System.out.println(e);
-		}
-		
-		
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("Hello");
+	@Test
+	public void wrongUsernameTest() throws JsonProcessingException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		    UserValue userValue = new UserValue();
+		    userValue.setUsername(USERNAME+Integer.MIN_VALUE);
+		    userValue.setPassword(PASSWORD);
+		    try {
+		    	ResponseEntity<String> responseEntity = restTemplate.postForEntity(AUTHENTICATE_REQUEST, userValue, String.class);
+		    }catch (HttpClientErrorException e) {
+		    	Assert.assertEquals(new Integer(403).intValue() , e.getStatusCode().value());
+			}
 	}
 
 }
