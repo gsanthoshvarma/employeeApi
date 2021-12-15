@@ -3,6 +3,7 @@
 Endpoint urls
 
 1) You should authenticate by using below endpoint
+
    http://localhost:{port}/employeeApi/authenticate/
    
 2) http://localhost:{port}/employeeApi/employees/ + Jwt token  - GET Method
